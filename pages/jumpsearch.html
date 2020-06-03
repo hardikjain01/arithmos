@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Arithmos</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="icon" href="../images/logo.svg">
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/logo.svg" alt="" /></span><span class="title">Arithmos</span><span class="subtitle">- By Hardik Jain</span>
+								</a>
+						</div>
+					</header>
+
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<header>
+                                <h1>Jump Search</h1>
+                                <p>Let’s consider the following array: [ 0, 1, 2, 3, 4, 7, 9, 14, 15, 16, 17, 18, 19, 23, 24, 25, 26, 27, 28, 29 ]. Length of the array is 20. 
+                                    Jump search will find the value of 19 with the following steps assuming that the block size to be jumped is 4.</p>
+								<ol>
+                                    <li>Jump from index 0 to index 4;
+                                    </li>
+                                    <li>Jump from index 4 to index 8;
+                                    </li>
+                                    <li>Jump from index 12 to index 16;
+                                    </li>
+                                    <li>Since the element at index 16 is greater than 19 we will jump back a step to come to index 12.
+                                    </li>
+                                    <li>Perform linear search from index 12 to get the element 19.
+                                    </li>
+                                </ol>
+                            </header>
+                            <div>
+                                <a href="../searchalgorithms.html" class="button icon small"><span class="fas fa-arrow-left"></span><span class="label">back</span></a>
+                            </div>
+							<section>
+								<pre>
+                                    <code>
+package algorithms;
+
+import java.util.Arrays;
+
+/** A class to implement Jump Search
+ * 
+ * @author Hardik Jain
+ *
+ */
+public class JumpSearch {
+	private int[] data;
+	private int size;
+	
+	public JumpSearch(int[] data) {
+		this.data = data;
+		this.size = this.data.length;
+	}
+
+	/**implements jump search
+	 * 
+	 * @param element to be searched
+	 * @param size of the array
+	 * @return index of element in data if found else -1
+	 */
+	public int search(int element) {
+		
+		// block size to be jumped
+		int jump = (int)Math.floor(Math.sqrt(size));
+		// Finding the block where element might be present 
+        int low = 0;
+        while (data[Math.min(jump, size)-1] &lt; element) 
+        { 
+            low = jump; 
+            jump += (int)Math.floor(Math.sqrt(size)); 
+            if (low >= size) 
+                return -1; 
+        }
+        
+        /*
+         * implementing linear search on the block 
+         * starting from low
+         */
+        while (data[low] &lt; element) 
+        { 
+            low++; 
+            /*
+             * If we reached next block or end of array, 
+             * element is not present. 
+             */
+            if (low == Math.min(jump, size)) 
+                return -1; 
+        } 
+  
+        // If element is found 
+        if (data[low] == element) 
+            return low;
+        
+		// If element is not found in the array
+		return -1;
+	}
+	
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+	
+	/**
+	 *  to print the array
+	 */
+	public void print() {
+		System.out.print("[ ");
+		for(int i=0; i&lt; size; i++) {
+			System.out.print(data[i]);
+			if(i&lt;size-1) {
+				System.out.print(", ");
+			}
+		}
+		System.out.print(" ]");
+	}
+	
+	public static void main(String[] args) {
+		int array[] = { 24, 18, 4, 19, 17, 9, 23, 0, 2, 3, 29, 14, 16, 7, 15, 25, 27, 28, 26, 1 };
+		Arrays.sort(array);
+		JumpSearch JS = new JumpSearch(array);
+		JS.print();
+		int toFind = 19;
+		int index = JS.search(toFind);
+		
+		if(index == -1) {
+			System.out.print("\nElement not found");
+		}
+		else {
+			System.out.print("\n" + toFind + " found at index " + index);
+		}
+	}
+}
+
+                                    </code>
+                                    <h2>Output:</h2>
+                                    <code>
+[ 0, 1, 2, 3, 4, 7, 9, 14, 15, 16, 17, 18, 19, 23, 24, 25, 26, 27, 28, 29 ]
+19 found at index 12
+                                    </code>
+                                </pre>
+                                <p>The time complexity of above algorithm is O(√n).</p>
+							</section>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

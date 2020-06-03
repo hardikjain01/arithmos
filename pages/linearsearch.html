@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Arithmos</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="icon" href="../images/logo.svg">
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/logo.svg" alt="" /></span><span class="title">Arithmos</span><span class="subtitle">- By Hardik Jain</span>
+								</a>
+						</div>
+					</header>
+
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<header>
+								<h1>Linear Search</h1>
+								<ul>
+                                    <li>Start from the leftmost element of arr[] and one by one compare x with each element of arr[]
+                                    </li>
+                                    <li>If x matches with an element, return the index.
+                                    </li>
+                                    <li>If x doesn’t match with any of elements, return -1.
+                                    </li>
+                                </ul>
+                            </header>
+                            <div>
+                                <a href="../searchalgorithms.html" class="button icon small"><span class="fas fa-arrow-left"></span><span class="label">back</span></a>
+                            </div>
+							<section>
+								<pre>
+                                    <code>
+package algorithms;
+
+import java.util.Random;
+
+/** A class to implement Linear Search
+ * 
+ * @author Hardik Jain
+ *
+ */
+
+public class LinearSearch {
+	private int[] data;
+	private int size;
+	
+	public LinearSearch(int[] data) {
+		this.data = data;
+		this.size = this.data.length;
+	}
+	
+	/**implements linear search
+	 * 
+	 * @param element to be searched
+	 * @return index of element in data if found else -1
+	 */
+	public int search(int element) {
+		// Searching for the element at every index of array
+		for(int i = 0; i&lt;size; i++) {
+			if(data[i] == element) {
+				return i;
+			}
+		}
+		// If element is not found in the array
+		return -1;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+	
+	/** 
+	 * To print the array
+	 */
+	public void print() {
+		System.out.print("[ ");
+		for(int i=0; i&lt;size; i++) {
+			System.out.print(data[i]);
+			if(i&lt;size-1) {
+				System.out.print(", ");
+			}
+		}
+		System.out.print(" ]");
+	}
+	
+	public static void main(String[] args) {
+		
+		/*
+		 * generates random numbers between 0-30
+		 * and stores them in the array
+		 */
+		Random rand = new Random();
+	    int[] array = new int[20];
+	    for(int i=0;i&lt;20;i++) {
+	    	array[i] = rand.nextInt(30);
+	    }
+	    
+	    int toFind = 23;
+	    LinearSearch LS = new LinearSearch(array);
+	    LS.print();
+	    int index = LS.search(toFind);
+	    if(index == -1) {
+	    	System.out.println("\nElement not found.");
+	    }
+	    else {
+	    	System.out.println("\n" + toFind + " found at index " + index);
+	    }
+	}
+	
+}
+
+                                    </code>
+                                    <h2>Output:</h2>
+                                    <code>
+[ 24, 26, 4, 19, 17, 16, 23, 0, 14, 3, 29, 14, 16, 7, 15, 29, 28, 28, 26, 0 ]
+23 found at index 6
+                                    </code>
+                                </pre>
+                                <p>The time complexity of above algorithm is O(n).</p>
+                                <p>Linear search is rarely used practically because other 
+                                    search algorithms such as the binary search algorithm 
+                                    and hash tables allow significantly faster searching 
+                                    comparison to Linear search.</p>
+							</section>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
